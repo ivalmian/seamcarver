@@ -1,11 +1,11 @@
 import unittest
-import skimage
+from skimage import io
 from seamcarving import carver
 
        
 class carverTest(unittest.TestCase):
 
-    test_image = skimage.io.imread('test_seamcarving/img/unsplash.jpg')
+    test_image = io.imread('test_seamcarving/img/unsplash.jpg')
 
     def test_initCarver(self):  
         c = carver.fastCarver(self.test_image)

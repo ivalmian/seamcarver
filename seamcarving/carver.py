@@ -49,15 +49,17 @@ class fastCarver:
                np.absolute(filters.convolve(self.bw, self.filty))
 
     #forward pass of the DP problem
-    def forward_pass(self):
-        energy = self.calc_energy()
+    def forward_pass(self, energy=None):
+        if energy is None:
+            energy = self.calc_energy()
         btrack = np.zeros_like(energy,dtype=np.uint32)             
         _forward_pass(energy,btrack) #updates in place 
         return energy,btrack          
     
     #find the lowest cumulative energy seam
-    def seam_mask(self):
-        energy,btrack = self.forward_pass()
+    def seam_mask(self,energy=None,btrack=None):
+        if btrack is None:
+            energy,btrack = self.forward_pass(energy)
         mask = np.ones_like(energy,dtype=np.bool)  
         _seam_mask(energy,btrack,mask) #updates in place
         return mask
