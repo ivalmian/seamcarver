@@ -22,3 +22,16 @@ class carverTest(unittest.TestCase):
     def test_calcSeamMask(self):
         c = carver.fastCarver(self.test_image)
         c.seam_mask()
+
+    def test_directSeamCarver(self):
+        c = carver.directSeamCarver(self.test_image)
+        c.carve(10,10)
+
+    def test_roiSeamCarver(self):
+        c = carver.roiSeamCarver(self.test_image)
+        c.carve(1,1)
+    
+    def test_roiSeamCarver_large(self):
+        c = carver.roiSeamCarver(self.test_image)
+        c.carve(200,200)
+
