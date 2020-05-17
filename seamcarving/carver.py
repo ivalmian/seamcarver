@@ -152,13 +152,15 @@ class fastCarver:
 
         return
 
-    def calc_energy(self):
+    def calc_energy(self,bw=None):
         """
         Computes local energy by convolving the black and white image with the filters.
         Can be overwritten by other energy implementations
         """
-        return np.absolute(filters.convolve(self.bw, self.filtx)) + \
-            np.absolute(filters.convolve(self.bw, self.filty))
+        if bw is None:
+            bw=self.bw
+        return np.absolute(filters.convolve(bw, self.filtx)) + \
+            np.absolute(filters.convolve(bw, self.filty))
 
     def forward_pass(self, energy: np.ndarray = None) -> (np.ndarray, np.ndarray):
         """
